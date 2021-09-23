@@ -33,29 +33,37 @@
     </head>
     <body>
     <h3>Customer Page</h3>
+     <form action="register" method="post">
+    <input type="hidden" name="link" value="Deletecustomers">
     <table class = "centre" cellspacing='10px'  border  = '1px'; cellpadding = '10px'>
      <thead>
                 <tr>
+                	 <th>Select<th>
                     <th>Id</th>
                     <th>Name</th>
                     <th>City</th>
+                   
                 </tr>
             </thead>
             <tbody>
     <c:forEach items="${customerDetailsList}" var="customer">
         <tr>
+       		 <td align="center">  
+                <input type="checkbox" name="selectedcustomers"   
+                    value= "${customer.customerId}">  
+             </td>  
             <td><c:out value="${customer.customerId}" /></td>
             <td><c:out value="${customer.name}" /></td>
             <td><c:out value="${customer.city}"/></td>
+             
         </tr>
     </c:forEach>
     </tbody>
 </table>
 <div class="row">
-  <a href="register?link=Add">
+  <a href="register?link=Addcustomer">
    <input type="button" class="app-button"  value="Add"></input></a>
-   <a href="register?link=Delete">
-   <input type="button" class="app-button"  value="Delete"></input></a>
+   <input type="submit" class="app-button"  value="Delete"></input></a>
  </div>
     </body>
 </html>

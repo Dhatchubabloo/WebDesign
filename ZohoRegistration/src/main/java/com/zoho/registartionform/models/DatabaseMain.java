@@ -7,17 +7,16 @@ public class DatabaseMain {
 	static Scanner scan = new Scanner(System.in);
 	public static void main(String[] args){
 		Helper logic = new Helper();
-		try {
-			logic.customerDataStore();
-			logic.accountDataStore();
-			logic.wholeDataCheck();
-		} catch (Exception e) {
-			System.out.println(e.getMessage());
-		}
+//		try {
+//			logic.customerDataStore();
+//			logic.accountDataStore();
+//			logic.wholeDataCheck();
+//		} catch (Exception e) {
+//			System.out.println(e.getMessage());
+//		}
 		DatabaseMain db = new DatabaseMain();
 		db.execution();
 	}
-
 	public void execution(){
 		System.out.println();
 		System.out.println("1.Enroll both customer details and account details");

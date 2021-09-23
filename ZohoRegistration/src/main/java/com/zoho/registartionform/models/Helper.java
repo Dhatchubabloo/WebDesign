@@ -20,7 +20,11 @@ public class Helper {
 //            e.printStackTrace();
 //        }
 //    }
-
+   	public void initialization() throws ExceptionHandling{
+   		customerDataStore();
+		accountDataStore();
+		wholeDataCheck();
+   	}
     public HashMap<Integer, CustomerInfo> customerDataStore() throws ExceptionHandling{
         HashMap<Integer, CustomerInfo>customerDataMap;
             customerDataMap=db.customerRetrival();
@@ -104,6 +108,9 @@ public class Helper {
         }
     }
     public  String caseExistingUser(AccountInfo in) throws ExceptionHandling {
+    	 String idStatus2 = Helper.idCheck(in.getCustomer_id());
+         if (idStatus2.equals("valid")) {
+
         ArrayList<Integer>accountIdList = db.accountInsertion(in);
         if(accountIdList.get(0)>0) {
             in.setAccount_no(accountIdList.get(1));
@@ -113,6 +120,9 @@ public class Helper {
             return "account insertion successful";
         else
             return "Account insertion Failed";
+         }
+         else
+        	 return "Deactivated Customer..so Can't Add account";
     }
     public  String entireDeletion(AccountInfo info,String type) throws ExceptionHandling {
         int status = db.dataUpdation(info,type);
@@ -163,6 +173,9 @@ public class Helper {
     }
     public static String amountWithdrawl(TransactionInfo info, String type){
         BigDecimal balance = getBalanceAmount(info.getCustomer_id(),info.getAccount_no());
+        if(Helper.idCheck(info.getCustomer_id()).equals("Invalid Customer_id")) {
+        	return "Deactivated Accout.....!\nTransaction Cancelled";
+        }
         int rate =balance.compareTo(info.getAmount());
         if(rate>=0) {
             BigDecimal totalAmount = balance.subtract(info.getAmount());
@@ -175,10 +188,13 @@ public class Helper {
                 return "Transaction Failed...Server Error";
         }
         else
-            return "Insufficien Balace";
+            return "Insufficient Balance";
     }
     public static String amountDeposite(TransactionInfo info, String type){
         BigDecimal balance = getBalanceAmount(info.getCustomer_id(),info.getAccount_no());
+        if(balance.equals(-1)) {
+        	return "Account Deactivated....Transaction Cancelled";
+        }
         BigDecimal totalAmount = balance.add(info.getAmount());
         int rate = db.transcation(info,totalAmount);
         if(rate>0){
@@ -195,9 +211,15 @@ public class Helper {
     public static BigDecimal getBalanceAmount(int customer_id, int account_no){
         HashMap<Integer,HashMap<Integer, AccountInfo>>finalAccountMap=MapHandler.OBJECT.retriveAccountDetails();
         HashMap<Integer, AccountInfo> temp = finalAccountMap.get(customer_id);
+        if(temp!=null) {
         AccountInfo info = temp.get(account_no);
         BigDecimal balance = info.getBalance();
         return balance;
+        }
+        else {
+        	return new BigDecimal(-1);
+        }
+      
     }
     public static String idCheck(int id) {
         if(MapHandler.OBJECT.retriveCustomerDetails().containsKey(id))

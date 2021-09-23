@@ -1,7 +1,7 @@
 <html>
     <head>
         <title>
-            Account Registration
+            Deposite
         </title>
           <style>
         body{
@@ -15,10 +15,10 @@
         </style>
     </head>
     <body>
-    <h3> Account Creation</h3>
+    <h3>Deposite Page</h3>
     <form action="register" method="post">
-     <input type="hidden" name="link" value="submitaccount">
-        <table class = "align"cellspacing='20px'>
+     <input type="hidden" name="link" value="depositeAmount">
+        <table class = "align" cellspacing='20px'>
         <tr>
         	<td>
      <label for="">Customer Id</label></td>
@@ -26,13 +26,13 @@
         </tr>
     <tr>
        
-        <td><label for="">Deposite Amount</label></td>
-        <td><input type="text" name="Amount" placeholder="Enter Amonut" required></td>
+        <td><label for="">AccountNumber</label></td>
+        <td><input type="text" name="Account_no" placeholder="Enter Account No" required></td>
 
     </tr>
     <tr><td>
-        <label for="">Branch</label></td>
-        <td><input type="text" name="Branch" placeholder="Enter Branch" required></td>
+        <label for="">Amount</label></td>
+        <td><input type="text" name="Amount" placeholder="Enter Amount" required></td>
 
     </tr>
     </table>

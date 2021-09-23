@@ -2,13 +2,24 @@
 <html>
     <head>
         <title>
-            customer Registaration
+            customer Registration
         </title>
+          <style>
+        body{
+        background-color:#9FE2BF;
+        text-align:center
+        }
+        .align{
+        	  margin-left:auto;
+        margin-right:auto;
+        }
+        </style>
     </head>
     <body>
+    <h3>Customer Creation</h3>
     <form action="register" method="post">
     <input type="hidden" name="link" value="submitcustomer">
-        <table cellspacing='20px'>
+        <table class ="align"cellspacing='20px'>
             
     <tr>
         <td><label>Name</label></td>
